@@ -53,10 +53,13 @@ a {
 	margin-top:32px;
 }
 
-#main {
+.main {
     background-color:#fefefe;
+    margin-top:40px;
+    margin-bottom: 40px; 
+    min-height: 580px;
 }
-#main .img-circle {
+.main .img-circle {
   margin-top:18px;
   height:70px;
   width:70px;

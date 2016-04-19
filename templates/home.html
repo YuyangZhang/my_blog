@@ -2,41 +2,49 @@
 
 {% block content %}
 <!-- main -->
-<div class="column col-sm-8" id="main" style="margin-top:40px;margin-bottom: 40px; min-height: 580px">
-    <!-- <div class="padding"> -->
+<div class="column col-sm-8 main">
         <div class="full col-sm-9" style="margin-left: 10%">
             <div class="row divider">
-                <p class="col-sm-12" style = "margin-top:40px"><a href="{% url 'home' %}" style="font-weight: 900;font-family: 'Ruda', sans-serif;font-size: 40px">Way 2 Passadena</a>
+                <p class="col-sm-12" style = "margin-top:40px">
+                    <a href="{% url 'home' %}" style="font-weight: 900;font-family: 'Ruda', sans-serif;font-size: 40px;color:#000000">Way 2 Passadena</a>
                     <span style="padding-left: 10%">
-                    <a href='http://weibo.com/u/1894401611' target="_blank"><i class="fa fa-weibo fa-2x"></i></a>
-                    <a href='https://www.facebook.com/profile.php?id=100008394663348' target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
-                    <a href='https://www.linkedin.com/in/yuyang-zhang-53b638105' target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
-                    <a href="https://github.com/YuyangZhang" target="_blank"><i class="fa fa-github fa-2x"></i></a>
-                    <a href="mailto:zhangyy1020@gmail.com" target="_top"><i class="fa fa-envelope fa-2x"></i></a>
-                </span></p>
+                        <a href='http://weibo.com/u/1894401611' target="_blank" class="icon"><i class="fa fa-weibo fa-2x"></i></a>
+                        <a href='https://www.facebook.com/profile.php?id=100008394663348' target="_blank" class="icon"><i class="fa fa-facebook-square fa-2x"></i></a>
+                        <a href='https://www.linkedin.com/in/yuyang-zhang-53b638105' target="_blank" class="icon"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                        <a href="https://github.com/YuyangZhang" target="_blank" class="icon"><i class="fa fa-github fa-2x"></i></a>
+                        <a href="mailto:zhangyy1020@gmail.com" target="_top" class="icon"><i class="fa fa-envelope fa-2x"></i></a>
+                    </span></p>
                 <p class="col-sm-12">Talk is cheap. Show me the code.</p>
-               <div class="col-sm-12"><hr style="max-width:1260px;width:80%;margin-top:-20px"></div>
-            </div>
+            <div class="col-sm-12"><hr style="max-width:1260px;width:82%;margin-top:-20px"></div>
+        </div>
             
-            {% for post in post_list %}
-            <div class="row">    
-              <div class="col-sm-12">
-                  <h3><a href="{% url 'detail' id=post.id %}" style="color:black;">{{ post.title }}</a></h3>
-                <h4><span class="label label-default">{{ post.category }}</span></h4>
+        {% for post in post_list %}
+        <div class="row">    
+            <div class="col-sm-10">
+                <h3><a href="{% url 'detail' id=post.id %}" style="color:black;">{{ post.title }}</a></h3>
+                <h4 id="{{ post.id }}*catbox"><i class="fa fa-tags" style="color: #dddddd">&nbsp&nbsp</i></h4>
+                    <script>
+                        var catList = "{{ post.category }}".split(",")
+                        for (var i = 0; i < catList.length; i++ )
+                            document.getElementById("{{ post.id }}*catbox").innerHTML += '<span class="label label-default">' + catList[i] + '</span>&nbsp&nbsp';
+                    </script>
                 <h4>
-                    <small class="text-muted">{{ post.date_time |date:'Y /m /d h:m'}} • <a href="{% url 'detail' id=post.id %}" class="text-muted">Read More>></a></small>
+                    <small class="text-muted">{{ post.date_time |date:'Y/m/d h:m'}}</small>
                 </h4>
-                {{ post.content }}
-              </div> 
-            </div>
-            <div class="row divider">    
-               <div class="col-sm-12"><hr style="max-width:1260px;width:80%"></div>
-            </div>
-            
-            {% endfor %}
+                <p id='{{ post.id }}abstract'>{{ post.content }}</p>
+                <script>
+                    document.getElementById("{{ post.id }}abstract").innerHTML = document.getElementById("{{ post.id }}abstract").innerHTML.substring(0,100) + "...&nbsp&nbsp<a href=\"{% url 'detail' id=post.id %}\" class=\"text-muted\">Read More>></a>"
+                </script>
+            </div> 
+        </div>
+        <div class="row divider" style="margin-top: -20px">    
+            <div class="col-sm-12"><hr style="max-width:1260px;width:82%"></div>
+        </div>
+        
+        {% endfor %}
 
             <div class="row divider">    
-                <p class="col-sm-12">Talk is cheap. Show me the code.</p>
+                <p class="col-sm-12"></p>
             </div>
         </div><!-- /col-9 -->
     <!-- </div> -->

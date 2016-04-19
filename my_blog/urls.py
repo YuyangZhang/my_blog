@@ -19,5 +19,6 @@ from django.contrib import admin
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'article.views.home',name = 'home'),
-    url(r'^(?P<id>\d+)/$', 'article.views.detail', name='detail'),
+    url(r'^post/(?P<id>\d+)/$', 'article.views.detail', name='detail'),
+    url(r'^list/(?P<cat>\d+)/$', 'article.views.lists', name='lists'),
 )

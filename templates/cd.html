@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load staticfiles%}<!-- main -->
+<div class="column col-sm-8 main">
+        <div class="full col-sm-9" style="margin-left: 10%">
+            <div class="row divider">
+                <img src="{% static 'img/cat.png' %}" class="titleimg"></img>
+                <p class="col-sm-12 title2">扯淡</p>
+                <p class="col-sm-12">一切都是命运石之门的选择!</p>
+            <div class="col-sm-12"><hr style="max-width:1260px;width:82%;margin-top:-20px"></div>
+        </div>
+        {% for post in post_list %}
+        <div class="row">    
+            <div class="col-sm-10">
+                <h4>
+                    <a href="{% url 'detail' id=post.id %}" class='listhref'>
+                        [{{ post.date_time |date:'Y/m/d'}}]{{ post.title }}</a>
+                    <span id="{{ post.id }}*catbox" style="color: #dddddd;float: right">
+                    </span>
+                </h4>
+                    <script>
+                        var catList = "{{ post.category }}".split(",")
+                        var tag = '<i class="fa fa-tags" style="color:#ff5050">&nbsp&nbsp</i>'
+                        for (var i = 0; i < catList.length; i++ )
+                            tag += '<span class="label label-default red">' + catList[i] + '</span>&nbsp&nbsp';
+                        document.getElementById("{{ post.id }}*catbox").innerHTML += tag
+                    </script>
+            </div> 
+        </div>
+        <div class="row divider" style="margin-top: -20px">    
+            <div class="col-sm-12"><hr style="max-width:1260px;width:82%"></div>
+        </div>
+        
+        {% endfor %}
+
+            <div class="row divider">    
+                <p class="col-sm-12"></p>
+            </div>
+        </div><!-- /col-9 -->
+    <!-- </div> -->
+</div>
+<!-- /main -->
+{% endblock %}
+<style>
