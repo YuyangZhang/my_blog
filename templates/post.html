@@ -1,26 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="column col-sm-8 main">
-        <div class="full col-sm-9" style="margin-left: 10%">
-            <div class="row" style="margin-top: 40px">    
-                <div class="col-sm-10">
-                    <p class="text-muted" style="margin-top: 20px;">{{ post.date_time |date:'Y/m/d h:m'}}</p>
-                    <h3 style="margin-top: -20px;margin-bottom: 20px">{{ post.title }}</h3>
-                    <h4 id="catbox">
-                        <i class="fa fa-tags" style="color: #dddddd">&nbsp&nbsp</i>
-                    </h4>
-                        <script>
-                            var catList = "{{ post.category }}".split(",")
-                            for (var i = 0; i < catList.length; i++ )
-                                document.getElementById("catbox").innerHTML += '<span class="label label-default">' + catList[i] + '</span>&nbsp&nbsp';
-                        </script>
-                    <div class="col-sm-12"><hr style="max-width:1260px;width:100%;padding-bottom: 20px"></div>
-                    <p id='abstract'>{{ post.content }}</p>
-                </div> 
-            </div>
-            <div class="row divider" style="margin-top: -20px">    
-                <div class="col-sm-12"><hr style="max-width:1260px;width:82%"></div>
-            </div>
-        </div>
+<div class="row" style="margin-top: 40px">    
+    <div class="col-sm-10">
+        <p class="text-muted" style="margin-top: 20px;">{{ post.date_time |date:'Y/m/d h:m'}}</p>
+        <h3 style="margin-top: -20px;margin-bottom: 20px">{{ post.title }}</h3>
+        <h4 id="catbox">
+            <i class="fa fa-tags" style="color: #a6a6a6">&nbsp&nbsp</i>
+        </h4>
+        <script>
+            var catList = "{{ post.category }}".split(",")
+            catList.sort()
+            var content = ''
+            for (var i = 0; i < catList.length; i++ )
+                content += '<span class="label label-default"><a href=\"/tags/' + catList[i] + "\" class='tag_href'>" + catList[i] + '</a></span>&nbsp&nbsp';
+            document.getElementById("catbox").innerHTML += content
+        </script>
+        <div class="col-sm-12"><hr style="max-width:1260px;width:100%;padding-bottom: 20px"></div>
+        <p id='abstract'>{{ post.content }}</p>
+    </div> 
+</div>
+<div class="row divider" style="margin-top: -20px">    
+    <div class="col-sm-12"><hr style="max-width:1260px;width:82%"></div>
 </div>
 {% endblock %}

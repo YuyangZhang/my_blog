@@ -1,57 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
 {% load staticfiles %}
-<div class="column col-sm-8 main">
-    <div class="full col-sm-9" style="margin-left: 10%">
-        <div class="row divider">
-            <img src="{% static 'img/cat.png' %}" class="titleimg"></img>
-            <p class="col-sm-12 title2">Update</p>
-            <p class="col-sm-12">咻咻咻咻咻咻</p>
-        <div class="col-sm-12"><hr style="max-width:1260px;width:82%;margin-top:-20px"></div>
-        </div>
-    </div>
-    <div class="full col-sm-9" style="margin-left: 10%">
-        <div class="row" style="margin-top: 40px">    
-            <div class="col-sm-10">
-                <form action="/updateArticle/" method="get">
-                  <fieldset class="form-group">
-                    <label >ID</label>
-                    <input class="form-control" type="text" name="article_id" value = "{{ post.id }}">
-                    <!-- <small class="text-muted">Input the title of your article</small> -->
-                  </fieldset>
-                  <fieldset class="form-group">
-                    <label >Title</label>
-                    <input class="form-control" type="text" name="title" value = "{{ post.title }}">
-                    <!-- <small class="text-muted">Input the title of your article</small> -->
-                  </fieldset>
-                  <fieldset class="form-group">
-                    <label >Category</label>
-                    <input class="form-control" type="text" name="category" id="category">
-                  </fieldset>
-                  <fieldset class="form-group">
-                    <label >Class</label>
-                    <input class="form-control" type="text" name="pplay" value="{{ post.pplay }}">
-                  </fieldset>
-                  <fieldset class="form-group">
-                    <label>Content</label>
-                    <textarea class="form-control" rows="9" type="text" name="content">{{ post.content }}</textarea>
-                  </fieldset>
-                  <div style="text-align: center;padding-top: 20px">
-                    <button type="submit" class="btn" >Submit</button>
-                  </div>
-                </form>
-                <script>
-                    var catList = "{{ post.category }}".split(",")
-                    for (var i = 0; i < catList.length; i++ ){
-                        document.getElementById("category").value += catList[i];
-                        if ( i != catList.length - 1)
-                            document.getElementById("category").value += ',';
-                    }
-                </script>
-            </div> 
-        </div>
-        <div class="row divider" style="margin-top: 20px">    
-        </div>
-    </div>
+<div class="row divider">
+    <img src="{% static 'img/cat.png' %}" class="titleimg"></img>
+    <p class="col-sm-12 title2">Update</p>
+    <p class="col-sm-12">咻咻咻咻咻咻</p>
+    <div class="col-sm-12"><hr style="max-width:1260px;width:82%;margin-top:-20px"></div>
 </div>
+    <div class="row" style="margin-top: 40px">    
+        <div class="col-sm-10">
+            <form action="/updateArticle/" method="get">
+              <fieldset class="form-group">
+                <label >ID</label>
+                <input class="form-control" type="text" name="article_id" value = "{{ post.id }}">
+                <!-- <small class="text-muted">Input the title of your article</small> -->
+              </fieldset>
+              <fieldset class="form-group">
+                <label >Title</label>
+                <input class="form-control" type="text" name="title" value = "{{ post.title }}">
+                <!-- <small class="text-muted">Input the title of your article</small> -->
+              </fieldset>
+              <fieldset class="form-group">
+                <label >Category</label>
+                <input class="form-control" type="text" name="category" id="category">
+              </fieldset>
+              <fieldset class="form-group">
+                <label >Class</label>
+                <input class="form-control" type="text" name="pplay" value="{{ post.pplay }}">
+              </fieldset>
+              <fieldset class="form-group">
+                <label>Content</label>
+                <textarea class="form-control" rows="9" type="text" name="content">{{ post.content }}</textarea>
+              </fieldset>
+              <div style="text-align: center;padding-top: 20px">
+                <button type="submit" class="btn" >Submit</button>
+              </div>
+            </form>
+            <script>
+                var catList = "{{ post.category }}".split(",")
+                for (var i = 0; i < catList.length; i++ ){
+                    document.getElementById("category").value += catList[i];
+                    if ( i != catList.length - 1)
+                        document.getElementById("category").value += ',';
+                }
+            </script>
+        </div> 
+    </div>
+    <div class="row divider" style="margin-top: 20px">    
+    </div>
 {% endblock %}

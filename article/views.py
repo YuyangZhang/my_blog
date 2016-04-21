@@ -4,43 +4,45 @@ from article.models import Article,Category
 from datetime import datetime
 from django.http import Http404
 # Create your views here.
+cat_list = Category.objects.all()
 def home(request):
      post_list = Article.objects.all()
-     return render(request, 'home.html', {'post_list' : post_list})
+     return render(request, 'home.html', {'post_list' : post_list, 'cat_list' : cat_list})
 
 def detail(request, id):
+     cat_list = Category.objects.all()
      try:
         post = Article.objects.get(id=str(id))
      except Article.DoesNotExist:
         raise Http404
-     return render(request, 'post.html', {'post' : post})
+     return render(request, 'post.html', {'post' : post, 'cat_list' : cat_list})
 def lists(request, cat):
     if int(cat) == 1:
         try:
             res = Article.objects.filter(pplay=str(cat))
         except Article.DoesNotExist:
             raise Http404
-        return render(request, 'bz.html', {'post_list' : res})
+        return render(request, 'bz.html', {'post_list' : res, 'cat_list' : cat_list})
     elif int(cat) == 2:
         try:
             res = Article.objects.filter(pplay=str(cat))
         except Article.DoesNotExist:
             raise Http404
-        return render(request, 'cd.html', {'post_list' : res})
+        return render(request, 'cd.html', {'post_list' : res, 'cat_list' : cat_list})
     else:
     	post_list = Article.objects.all()
-        return render(request, 'lists.html', {'post_list' : post_list})
+        return render(request, 'lists.html', {'post_list' : post_list, 'cat_list' : cat_list})
 def addArticle_form(request):
-    return render(request, 'addArticle_form.html')
+    return render(request, 'addArticle_form.html',{'cat_list' : cat_list})
 def updateArticle_form(request):
     post_list = Article.objects.all()
-    return render(request, 'updateArticle_form.html', {'post_list' : post_list})
+    return render(request, 'updateArticle_form.html', {'post_list' : post_list, 'cat_list' : cat_list})
 def updateArticle_detail_form(request, id):
      try:
         post = Article.objects.get(id=str(id))
      except Article.DoesNotExist:
         raise Http404
-     return render(request, 'updateArticle_detail_form.html', {'post' : post})
+     return render(request, 'updateArticle_detail_form.html', {'post' : post, 'cat_list' : cat_list})
 def addArticle(request):
     if 'title' in request.GET and 'category' in request.GET and 'pplay' in request.GET:
         message = ''
@@ -127,3 +129,12 @@ def deleteArticle(request, article_id):
     except Article.DoesNotExist:
         raise Http404
     return HttpResponse("Deleted " + dArticle.title + message)
+def tags(request, tag_name):
+    try:
+        tag = Category.objects.get(name=tag_name)
+        post_list = []
+        for post_id in tag.articles.split(','):
+            post_list.append(Article.objects.get(id=post_id))
+        return render(request, 'tags.html', {'tag' : tag,'post_list' : post_list, 'cat_list' : cat_list})
+    except Category.DoesNotExist:
+        raise Http404

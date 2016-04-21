@@ -3,9 +3,9 @@
 {% block content %}
 {% load staticfiles%}
 <div class="row divider">
-        <!-- <img src="{% static 'img/cat.png' %}" class="titleimg"></img> -->
-    <p class="col-sm-12 title2">搬砖</p>
-    <p class="col-sm-12">这里是搬砖民工集散中心</p>
+    <img src="{% static 'img/cat.png' %}" class="titleimg"></img>
+    <p class="col-sm-12 title2">Tag:{{ tag.name }}</p>
+    <p class="col-sm-12">这里是包含&nbsp<span class="label label-default">{{ tag.name }}</span>&nbsp的文章列表</p>
     <div class="col-sm-12"><hr style="max-width:1260px;width:82%;margin-top:-20px"></div>
 </div>
 {% for post in post_list %}
@@ -32,7 +32,7 @@
 </div>
 <div class="row divider" style="margin-top: -20px">    
     <div class="col-sm-9">
-        <a href="{% url 'detail' id=post.id %}" class="text-muted" style="float: left;">Read More>></a>  
+        <a href="{% url 'detail' id=post.id %}" class="text-muted" style="float: left;">Read More>></a> 
         <hr style="max-width:1260px;width:115%"></div>
 </div>
 

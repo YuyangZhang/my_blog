@@ -114,3 +114,24 @@ border-bottom-width: 0px;
 .red{
     background-color:#ff5050;   
 }
+.headimg{
+    width:120px;
+    height:120px;
+    margin-bottom: 20px;
+}
+.sidebar_label{
+    margin-top: 40px;
+}
+.sidebar_ul{
+    padding-left: 0px;
+    list-style-type:none;
+}
+.sidebar_li{
+    margin-left: 10px;
+}
+.tag_href{
+    color:#ffffff;
+}
+.tag_href:hover{
+    color:#dddddd;
+}

@@ -27,4 +27,5 @@ urlpatterns = patterns('',
     url(r'^updateArticle_detail_form/(?P<id>\d+)/$', 'article.views.updateArticle_detail_form', name='updateArticle_detail_form'),
     url(r'^updateArticle/$', 'article.views.updateArticle', name='updateArticle'),
     url(r'^deleteArticle/(?P<article_id>\d+)/$', 'article.views.deleteArticle', name='deleteArticle'),
+    url(r'^tags/(?P<tag_name>\w+)/$', 'article.views.tags', name='tags'),
 )
